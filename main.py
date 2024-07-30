@@ -1,11 +1,14 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Index o página principal"
+    dicionario = {'titulo':'Página principal', 'encabezado':'Bienvenido a la página web'}
+    return render_template('index.html', datos=dicionario)
 
+
+# Redirección de rutas
 @app.route('/redirecciona')
 @app.route('/redirecciona/<string:sitio>')
 def redirecciona(sitio=None):
@@ -16,7 +19,7 @@ def redirecciona(sitio=None):
     
 @app.route('/acercade')
 def acercade():
-    return "<h1>Acerca de mi<h1>"
+    return render_template('acercade.html')
 
 # Ruta con parametros.
 @app.route('/saludame') 
