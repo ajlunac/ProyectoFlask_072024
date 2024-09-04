@@ -1,10 +1,19 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
+@app.before_request
+def before_request():
+    print("Antes de la petición")
+@app.after_request
+def before_request(response):
+    print("Después de la petición")
+    return response
 @app.route('/')
 def index():
-    dicionario = {'titulo':'Página principal', 'encabezado':'Bienvenido a la página web'}
+    print("Accediendo al index o página principal")
+    dicionario = {'titulo':'Página principal', 
+                  'encabezado':'Bienvenido a la página web'}
     return render_template('index.html', datos=dicionario)
 
 
@@ -21,6 +30,14 @@ def redirecciona(sitio=None):
 def acercade():
     dicionario = {'titulo':'Acerca de', 'encabezado':'Acerca de está página'}
     return render_template('acercade.html', datos=dicionario)
+
+@app.route('/condicionybucle')
+def condicionybucle():
+    datos = {
+        'edad' : 24,
+        'nombres' : ['Jose', 'Mar', 'Lucia', 'Eva'],
+    }
+    return render_template('condicionybucle.html', datos = datos)
 
 # Ruta con parametros.
 @app.route('/saludame') 
