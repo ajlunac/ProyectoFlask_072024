@@ -1,0 +1,10 @@
+{% extends './base.html' %}
+
+{% block titulo %}
+    <title>Página no encontrada</title>
+{% endblock %} 
+
+{% block contenido %}
+    <h1>Lo siento está página no está disponible</h1>
+    <a href="{{ url_for('index') }}">Página principal</a>
+{% endblock %}
